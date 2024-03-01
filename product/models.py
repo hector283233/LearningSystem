@@ -52,9 +52,9 @@ class Group(models.Model):
         verbose_name_plural = 'Группы'
 
     def save(self, *args, **kwargs):
-        if not self.pk:
+        if not self.pk: # Пересобирает только при создании группы
             super(Group, self).save(*args, **kwargs)
-            group_create_shuffle(self.product)
+            group_create_shuffle(self.product) 
         else:
             super(Group, self).save(*args, **kwargs)
 
@@ -88,7 +88,6 @@ custom_delete(StudentLesson)
 
 # Вероятно, существует множество способов повышения производительности 
 # и множество способов оптимизации, но на данный момент это лучшее, что я могу.
-
 def student_group_arrange(product):
     product_groups = Group.objects.filter(product=product)
     min_group = product_groups[0]
@@ -104,7 +103,7 @@ def student_group_arrange(product):
     else:
         return -1
 
-    
+# Эта функция для перемешивания при создании новой группы.
 def group_create_shuffle(product):
     start_time = product.start_time
     now = timezone.now()
