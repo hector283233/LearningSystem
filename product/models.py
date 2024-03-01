@@ -86,6 +86,9 @@ class StudentLesson(models.Model):
 custom_delete(StudentLesson)
 
 
+# Вероятно, существует множество способов повышения производительности 
+# и множество способов оптимизации, но на данный момент это лучшее, что я могу.
+
 def student_group_arrange(product):
     product_groups = Group.objects.filter(product=product)
     min_group = product_groups[0]
